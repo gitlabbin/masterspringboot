@@ -1,3 +1,9 @@
 == Spring Boot with Docker
 
 * Source code for tutorial: http://www.masterspringboot.com/cloud/docker/running-a-spring-boot-application-with-docker
+
+
+mvn clean package
+
+
+http://localhost:8080/swagger-ui.html#
