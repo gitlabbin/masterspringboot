@@ -2,6 +2,7 @@ package com.example.demodocker.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.PathProvider;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -14,9 +15,25 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class Swagger2Config {
+  private final String BASE_PATH = "/idm";
+
   @Bean
   public Docket api() {
-    return new Docket(DocumentationType.SWAGGER_2)
+    return new Docket(DocumentationType.SWAGGER_2).pathProvider(new PathProvider() {
+      @Override
+      public String getApplicationBasePath() {
+        return null;
+      }
+
+      @Override
+      public String getOperationPath(String operationPath) {
+        return BASE_PATH.concat(operationPath);
+      }
+      @Override
+      public String getResourceListingPath(String groupName, String apiDeclaration) {
+        return BASE_PATH;
+      }
+    })
         .select()
         .apis(RequestHandlerSelectors.basePackage("com.example.demodocker"))
         .paths(PathSelectors.regex("/api/v1/.*"))
