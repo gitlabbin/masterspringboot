@@ -1,37 +1,37 @@
 package com.example.demodocker.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.PathProvider;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.paths.RelativePathProvider;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import javax.servlet.ServletContext;
 
 @Configuration
 @EnableSwagger2
 public class Swagger2Config {
     private final String BASE_PATH = "/idm";
 
+    private final ServletContext servletContext;
+
+    @Autowired
+    public Swagger2Config(ServletContext servletContext) {
+        this.servletContext = servletContext;
+    }
+
     @Bean
     public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2).pathProvider(new PathProvider() {
+        return new Docket(DocumentationType.SWAGGER_2).pathProvider(new RelativePathProvider(servletContext) {
             @Override
             public String getApplicationBasePath() {
-                return null;
-            }
-
-            @Override
-            public String getOperationPath(String operationPath) {
-                return BASE_PATH.concat(operationPath);
-            }
-
-            @Override
-            public String getResourceListingPath(String groupName, String apiDeclaration) {
                 return BASE_PATH;
             }
         })
