@@ -19,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class Swagger2Config {
-  private final String BASE_PATH = "/idm";
+  private final String BASE_PATH = "/secure";
 
   private final ServletContext servletContext;
 
