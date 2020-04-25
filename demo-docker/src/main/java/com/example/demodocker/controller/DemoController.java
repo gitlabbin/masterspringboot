@@ -1,10 +1,7 @@
 package com.example.demodocker.controller;
 
 import com.example.demodocker.model.Customer;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
     description = "Operations pertaining to employee in IDM Management System")
 public class DemoController {
 
-  @ApiOperation(value = "View a list of available customer", response = List.class)
+  @ApiOperation(
+      value = "View a list of available customer",
+      response = List.class,
+      authorizations = {@Authorization(value = "apiKey")})
   @ApiResponses(
       value = {
         @ApiResponse(code = 200, message = "Successfully retrieved list"),
