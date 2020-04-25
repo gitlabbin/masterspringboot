@@ -3,6 +3,7 @@ package com.example.demodocker.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.PathProvider;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -29,9 +30,19 @@ public class Swagger2Config {
 
     @Bean
     public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2).pathProvider(new RelativePathProvider(servletContext) {
+        return new Docket(DocumentationType.SWAGGER_2).pathProvider(new PathProvider() {
             @Override
             public String getApplicationBasePath() {
+                return null;
+            }
+
+            @Override
+            public String getOperationPath(String operationPath) {
+                return BASE_PATH.concat(operationPath);
+            }
+
+            @Override
+            public String getResourceListingPath(String groupName, String apiDeclaration) {
                 return BASE_PATH;
             }
         })
