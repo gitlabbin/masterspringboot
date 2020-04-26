@@ -47,7 +47,7 @@ public class DemoController {
             message = "Accessing the resource you were trying to reach is forbidden"),
         @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
       })
-  @PostMapping("/customers")
+  @PostMapping("/customer")
   public Customer addCustomer(Customer customer) {
     return new Customer(3, "Albert");
   }
@@ -65,7 +65,7 @@ public class DemoController {
             message = "Accessing the resource you were trying to reach is forbidden"),
         @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
       })
-  @PutMapping("/customers")
+  @PutMapping("/customer")
   public Customer updateCustomer(Customer customer) {
     return customer;
   }
@@ -83,8 +83,8 @@ public class DemoController {
             message = "Accessing the resource you were trying to reach is forbidden"),
         @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
       })
-  @DeleteMapping("/customers")
-  public String deleteCustomer() {
+  @DeleteMapping("/customer")
+  public String deleteCustomer(String customerId) {
     return "Albert";
   }
 }
