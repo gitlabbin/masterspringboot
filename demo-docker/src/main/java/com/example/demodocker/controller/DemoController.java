@@ -48,8 +48,26 @@ public class DemoController {
         @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
       })
   @PostMapping("/customers")
-  public Customer addCustomer() {
+  public Customer addCustomer(Customer customer) {
     return new Customer(3, "Albert");
+  }
+
+  @ApiOperation(
+      value = "Update customer",
+      response = Customer.class,
+      authorizations = {@Authorization(value = "apiKey")})
+  @ApiResponses(
+      value = {
+        @ApiResponse(code = 200, message = "Successfully retrieved list"),
+        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+        @ApiResponse(
+            code = 403,
+            message = "Accessing the resource you were trying to reach is forbidden"),
+        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+      })
+  @PutMapping("/customers")
+  public Customer updateCustomer(Customer customer) {
+    return customer;
   }
 
   @ApiOperation(
