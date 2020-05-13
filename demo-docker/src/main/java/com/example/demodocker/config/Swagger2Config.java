@@ -59,8 +59,8 @@ public class Swagger2Config {
   private ApiInfo apiEndPointsInfo() {
 
     return new ApiInfoBuilder()
-        .title("IDM Consumer REST API")
-        .description("IDM Management REST API")
+        .title("IDM Consumer API")
+        .description("IDM management API")
         .contact(new Contact("Api support", "www.idmservice.com", "idmsupport@gmail.com"))
         .license("Apache 2.0")
         .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
